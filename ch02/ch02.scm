@@ -98,6 +98,8 @@ one-though-four
  (if (null? list1) list2
   (cons (car list1) (append (cdr list1) list2))))
 
+(define nil ())
+ 
 ;; list mapping
 (define (scale-list items factor)
  (if (null? items) nil
@@ -122,4 +124,29 @@ one-though-four
  (map (lambda (x) (* x factor))
       items))
 
+;; 2.2.2
+(cons (list 1 2) (list 3 4))
+
+(define x (cons (list 1 2) (list 3 4)))
+
+(length x)
+;; 3
+
+(count-leaves x)
+;; 4
+
+(list x x)
+;; (((1 2) 3 4) ((1 2) 3 4))
+
+(length (list x x))
+;; 2
+
+(count-leaves (list x x))
+;; 8
+
+(define (count-leaves x)
+ (cond ((null? x) 0)
+       ((not (pair? x)) 1)
+       (else (+ (count-leaves (car x))
+                (count-leaves (cdr x))))))
 
