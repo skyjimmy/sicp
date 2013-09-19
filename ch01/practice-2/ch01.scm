@@ -45,3 +45,41 @@ circumference ;; 62.8318
 (* (+ 2 (* 4 6))
    (+ 3 5 7))
 
+;; 1.1.4
+(define (square x) (* x x))
+
+(square 21)
+;; 441
+
+(square (+ 2 5))
+;; 49
+
+(square (square 3))
+;; 81
+
+(define (sum-of-squares x y)
+  (+ (square x) (square y)))
+
+(sum-of-squares 3 4)
+;; 25
+
+(define (f a)
+  (sum-of-squares (+ a 1) (* a 2)))
+
+(f 5)
+;; 136
+
+;; 1.1.6
+(define (abs x)
+  (cond ((> x 0) x)
+		((= x 0) 0)
+		((< x 0) (- x))))
+
+(define (abs x)
+  (cond ((< x 0) (- x))
+		(else x)))
+
+(define (abs x)
+  (if (< x 0) (- x)
+	x))
+
