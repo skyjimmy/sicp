@@ -1,0 +1,15 @@
+(define (square n) (* n n))
+(define (sum-of-square a b)
+  (+ (square a) (square b)))
+
+(define (plus-square a b c)
+  (cond ((and (> a b) (> a c)) 
+		 (if (> b c) (sum-of-square a b)
+		   (sum-of-square a c)))
+		((and (> b c) (> b a))
+		 (if (> a c) (sum-of-square b a)
+		   (sum-of-square b c)))
+		((and (> c a) (> c b))
+		 (if (> a b) (sum-of-square c a)
+		   (sum-of-square c b)))))
+		
