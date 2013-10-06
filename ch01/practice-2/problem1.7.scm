@@ -14,10 +14,13 @@
 ;; 이 말의 뜻이 정확히 어떤 뜻인지 잘 모르겠다.
 ;; 왜 작은 값과 큰 값의 경우에 수가 정확하게 나오지 않는지 내 생각을
 ;; 정리 하는 것이 필요 할 듯 싶다.
+;; 오차를 줄이기 위한 과정이 하나 더 추가 된거 같긴 한데
+;; 왜 (* 0.001 guess)가 추가된 건지는 잘 모르겠다.
+;; 좀 더 고민 해 봐야 될 문제 이다.
 
-(define (sqrt-iter guess x)
-  (if (good-enough? guess x) guess
-		  (sqrt-iter (improve guess x) x)))
+(define (sqrt-iter before-guess guess x)
+  (if (good-enough? before-guess guess) guess
+		  (sqrt-iter guess (improve guess x) x)))
 
 (define (improve guess x)
   (average guess (/ x guess)))
@@ -25,12 +28,12 @@
 (define (average x y)
   (/ (+ x y) 2))
 
-(define (good-enough? guess x)
-  (< (abs (- (square guess) x)) 0.001))
+(define (good-enough? before-guess guess)
+  (< (abs (- before-guess guess)) (* 0.001 guess)))
 
 (define (square x)
   (* x x))
 
 (define (sqrt x)
-  (sqrt-iter 1.0 x))
+  (sqrt-iter 1.0 (improve 1.0 x) x))
 
