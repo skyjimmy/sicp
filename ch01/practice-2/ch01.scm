@@ -194,3 +194,7 @@ circumference ;; 62.8318
 (define (even? n)
   (= (remainder n 2) 0))
 
+(define (gcd a b)
+  (if (= b 0) a
+	(gcd  b (remainder a b))))
+
