@@ -271,4 +271,45 @@ circumference ;; 62.8318
   (define (add-dx x) (+ x dx))
   (* (sum f (+ a (/ dx 2.0)) add-dx b) dx))
 
+;;1.3.2
+(define (pi-sum3 a b)
+  (sum (lambda (x) (/ 1.0 (* x (+ x 2)))) a
+	   (lambda (x) (+ x 4)) b))
+
+(define (integral3 f a b dx)
+  (* (sum f (+ a (/ dx 2.0))
+		  (lambda (x) (+ x dx)) b)
+	 dx))
+
+(define plus4 (lambda (x) (+ x 4)))
+
+(define (f x y)
+  (define (f-helper a b)
+	(+ (* x (square a))
+	   (* y b)
+	   (* a b)))
+  (f-helper (+ 1 (* x y))
+			(- 1 y)))
+
+(define (f-lambda x y)
+  ((lambda (a b)
+	 (+ (* x (square a))
+		(* y b)
+		(* a b)))
+   (+ 1 (* x y))
+   (- 1 y)))
+
+(define (f-let x y)
+  (let ((a (+ 1 (* x y)))
+		(b (- 1 y)))
+	(+ (* x (square a))
+	   (* y b)
+	   (* a b))))
+
+(define (f-define x y)
+  (define a (+ 1 (* x y)))
+  (define b (- 1 y))
+  (+ (* x (square a))
+	 (* y b)
+	 (* a b)))
 
