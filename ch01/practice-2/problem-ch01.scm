@@ -12,6 +12,3 @@
 (define (compose f g)
   (lambda (x) (f (g x))))
 
-;; 1.43 - ing
-(define (repeated f n)
-  ((compose square square) n))
