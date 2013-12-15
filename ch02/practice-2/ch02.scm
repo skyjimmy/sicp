@@ -102,3 +102,36 @@
 
 (define (midpoint-segment seg)
   (cons (/ (+ (x-point (start-segment seg)) (x-point (end-segment seg))) 2) (/ (+ (y-point (start-segment seg)) (y-point (end-segment seg))) 2)))
+
+;; problem 2-3
+
+;; 2.1.3
+(define (cons213 x y)
+  (define (dispatch m)
+	(cond ((= m 0) x)
+		  ((= m 1) y)
+		  (else (error "Arcument not 0 or 1 -- CONS" m))))
+  dispatch)
+
+(define (car213 z) (z 0))
+(define (cdr213 z) (z 1))
+
+;; problem 2-4
+;; (define (cons24 x y)
+;;   (lambda (m) (m x y)))
+
+;; (define (car24 z)
+;;   (z (lambda (p q) p)))
+
+;; 맞바꿈 게산으로 (car24 (cons24 x y)) 풀이
+;; (car24 (cons24 x y))
+;; ((lambda (m) (m x y)) (lambda (p q) p))
+;; ((lambda (p q) p) x y)
+;; (lambda (x y) x)
+;; x
+
+;; cdr 정의 
+;; (define (cdr24 z)
+;;   (z (lambda (p q) q)))
+
+;; problem 2-5
