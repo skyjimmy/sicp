@@ -59,7 +59,7 @@
   (display (denom x))
   (newline))
 
-;; problem 2.1
+;; problem 2.1 - no
 
 ;; 2.1.2
 (define (make-rat-2 n d)
@@ -103,7 +103,7 @@
 (define (midpoint-segment seg)
   (cons (/ (+ (x-point (start-segment seg)) (x-point (end-segment seg))) 2) (/ (+ (y-point (start-segment seg)) (y-point (end-segment seg))) 2)))
 
-;; problem 2-3
+;; problem 2-3 - no
 
 ;; 2.1.3
 (define (cons213 x y)
@@ -134,9 +134,9 @@
 ;; (define (cdr24 z)
 ;;   (z (lambda (p q) q)))
 
-;; problem 2-5
+;; problem 2-5 - no 
 
-;; problem 2-6
+;; problem 2-6 - no
 
 ;; 2.1.4
 (define (add-interval x y)
@@ -165,4 +165,38 @@
   (make-interval (- (lower-bound x) (lower-bound y))
 				 (- (upper-bound x) (upper-bound y))))
 
+;; problem 2-9 - no
 
+;; problem 2-10 - no 
+
+;; problem 2-11 - no
+
+(define (make-center-width c w)
+  (make-interval (- c w) (+ c w)))
+
+(define (center i)
+  (/ (+ (lower-bound i) (upper-bound i)) 2))
+
+(define (width i)
+  (/ (- (upper-bound i) (lower-bound i)) 2))
+
+;; problem 2-12 - no
+
+;; problem 2-13 - no
+
+(define (par1 r1 r2)
+  (div-interval (mul-interval r1 r2)
+				(add-interval r2 r2)))
+
+(define (par2 r1 r2)
+  (let ((one (make-interval 1 1)))
+	(div-interval one (add-interval (div-interval one r1)
+									(div-interval one r2)))))
+
+;; problem 2-14 - no
+
+;; problem 2-15 - no
+
+;; problem 2-16 - no
+
+;; 2.2
