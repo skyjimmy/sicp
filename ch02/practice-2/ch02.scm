@@ -200,3 +200,32 @@
 ;; problem 2-16 - no
 
 ;; 2.2
+;; 2.2.1
+;; (cons 1 (cons 2 (cons 3 (cons 4 nil))))
+(define one-through-four (list 1 2 3 4))
+
+(define (list-ref-221 items n)
+  (if (= n 0)
+	(car items)
+	(list-ref-221 (cdr items) (- n 1))))
+
+(define squares (list 1 4 9 16 25))
+
+(define (length-221 items)
+  (if (null? items) 0
+	(+ 1 (length-221 (cdr items)))))
+
+(define odds (list 1 3 5 7))
+
+(define (length-221-2 items)
+  (define (length-iter a count)
+	(if (null? a) count
+	  (length-iter (cdr a) (+ 1 count))))
+  (length-iter items 0))
+
+(define (append-221 list1 list2)
+  (if (null? list1) list2
+	(cons (car list1) (append-221 (cdr list1) list2))))
+
+
+
