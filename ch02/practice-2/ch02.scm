@@ -227,5 +227,8 @@
   (if (null? list1) list2
 	(cons (car list1) (append-221 (cdr list1) list2))))
 
-
+;; problem 2-17
+(define (last-pair items)
+  (if (= (length-221 items) 1) items
+	(last-pair (cdr items))))
 
