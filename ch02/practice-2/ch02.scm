@@ -232,3 +232,12 @@
   (if (= (length-221 items) 1) items
 	(last-pair (cdr items))))
 
+;; problem 2-18
+;; 아래 결과는 괄호에 묶인 형태로 결과가 출력됨
+;; (((((() 5) 4) 3) 2) 1)
+(define (reverse-218 items)
+  (if (null? items) (list) 
+	(list (reverse-218 (cdr items)) (car items))))
+  
+
+
