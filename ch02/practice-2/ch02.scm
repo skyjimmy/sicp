@@ -238,6 +238,38 @@
 (define (reverse-218 items)
   (if (null? items) (list) 
 	(list (reverse-218 (cdr items)) (car items))))
-  
+
+;; list-ref는 0부터 시작 마지막 값은 lenght 의 -1 이다.
+(define (reverse-218-2 items)
+  (define (reverse-218-2-iter len)
+	(if (< len 0) (list)
+	  (let ((value (list-ref-221 items len)))
+		(cons value (reverse-218-2-iter (- len 1))))))
+  (let ((endvalue (- (length-221 items) 1)))
+	(reverse-218-2-iter endvalue)))
+
+;; problem 2-19
+;; 코인 단위의 위치를 변경해도 결과에 영향이 없는 이유
+;; 값을 꺼내와서 계산을 하는 것이기 때문에 값이 변경되지 않는 한
+;; 위치는 상관이 없다.
+(define us-coins (list 1 5 50 25 10))
+(define uk-coins (list 100 50 20 10 5 2 1 0.5))
+
+(define (cc amount coin-values)
+  (cond ((= amount 0) 1)
+		((or (< amount 0) (no-more? coin-values)) 0)
+		(else
+		  (+ (cc amount (except-first-denomination coin-values))
+			 (cc (- amount (first-denomination coin-values))
+				 coin-values)))))
+
+(define (first-denomination coin-values)
+  (car coin-values))
+
+(define (except-first-denomination coin-values)
+  (cdr coin-values))
+
+(define (no-more? coin-values)
+  (null? coin-values))
 
 
