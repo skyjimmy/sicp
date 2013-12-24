@@ -272,4 +272,34 @@
 (define (no-more? coin-values)
   (null? coin-values))
 
+;; problem 2-20
+(define (same-parity f . l)
+  (define (same-parity-iter remain lis)
+	(cond ((null? lis) (list))
+		  ((= (remainder (car lis) 2) remain)
+		   (cons (car lis) (same-parity-iter remain (cdr lis))))
+		  (else (same-parity-iter remain (cdr lis)))))
+  (if (= (remainder f 2) 0) (cons f (same-parity-iter 0 l))
+	(cons f (same-parity-iter 1 l))))
 
+;; list mapping
+(define (scale-list items factor)
+  (if (null? items) '()
+	(cons (* (car items) factor)
+		  (scale-list (cdr items) factor))))
+
+(define (map-221 proc items)
+  (if (null? items) '()
+	(cons (proc (car items))
+		  (map-221 proc (cdr items)))))
+
+(define (scale-list-2 items factor)
+  (map-221 (lambda (x) (* x factor)) items))
+
+;; problem 2-21
+(define (square-list-1 items)
+  (if (null? items) '()
+	(cons (* (car items) (car items)) (square-list-1 (cdr items)))))
+
+(define (square-list-2 items)
+  (map (lambda (x) (* x x)) items))
