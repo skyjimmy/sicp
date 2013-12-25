@@ -333,3 +333,7 @@
 	  (iter (cdr things) (cons answer (square (car things))))))
   (iter items '()))
 
+;; problem-2-23
+(define (for-each-223 f items)
+  (cond ((not (null? items)) (f (car items))
+							 (for-each-223 f (cdr items)))))
