@@ -303,3 +303,33 @@
 
 (define (square-list-2 items)
   (map (lambda (x) (* x x)) items))
+
+;; problem 2-22
+;; 순서가 왜 뒤집혀서 출력되는지 설명하기
+;; 아래 식을 풀어보면 items이 1 2 3 일때
+;; (iter (1 2 3) ())
+;; (iter (2 3) (cons 1 ()))
+;; (iter (3) (cons 4 1 ()))
+;; (iter () (cons 9 4 1 ()))
+;; 순으로 식이 풀이가 된다. 즉 answer의 값이 뒤에 추가가 되기 때문이다.
+(define (square x) (* x x))
+
+(define (square-list-222 items)
+  (define (iter things answer)
+	(if (null? things) answer
+	  (iter (cdr things) (cons (square (car things)) answer))))
+  (iter items '()))
+
+;; 아래 식은 answer의 위치를 바꾸었을 때의 프로시져이다.
+;; items가 (list 1 2 3)일때 (((() . 1) . 4) . 9)로 결과가
+;; 출력되는 이유 설명하기
+;; cons의 특성상 (cons 10 (list 1 2)) 일때는 정상적으로
+;; (10 1 2)로 출려이 되지만
+;; (cons (list 1 2) 10) 일때는 ((1 2) 10)으로 출력되기 때문이다.
+
+(define (square-list-222-2 items)
+  (define (iter things answer)
+	(if (null? things) answer
+	  (iter (cdr things) (cons answer (square (car things))))))
+  (iter items '()))
+
