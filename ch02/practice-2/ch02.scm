@@ -337,3 +337,18 @@
 (define (for-each-223 f items)
   (cond ((not (null? items)) (f (car items))
 							 (for-each-223 f (cdr items)))))
+
+;; 2.2.2
+;; (cons (list 1 2) (list 3 4)) -> ((1 2) 3 4)
+;; tree
+(define (count-leaves x)
+  (cond ((null? x) 0)
+		((not (pair? x)) 1)
+		(else (+ (count-leaves (car x))
+				 (count-leaves (cdr x))))))
+;; problem 2-24 - 종이에 그림
+
+;; problem 2-25
+;; (1 3 (5 7) 9) -> (car (cdr (car (cdr (cdr x)))))
+;; ((7)) -> (car (car x))
+;; (1 (2 (3 (4 (5 (6 7)))))) -> (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr x))))))))))))
