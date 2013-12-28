@@ -352,3 +352,29 @@
 ;; (1 3 (5 7) 9) -> (car (cdr (car (cdr (cdr x)))))
 ;; ((7)) -> (car (car x))
 ;; (1 (2 (3 (4 (5 (6 7)))))) -> (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr x))))))))))))
+
+;; problem 2-26
+(define x (list 1 2 3))
+(define y (list 4 5 6))
+
+;; (append x y) -> (1 2 3 4 5 6)
+;; (cons x y) -> ((1 2 3) 4 5 6)
+;; (list x y) -> ((1 2 3) (4 5 6))
+
+;; problem 2-27
+(define x-227 (list (list 1 2) (list 3 4)))
+
+(define (deep-reverse x)
+  (cond ((null? x) '())
+		((not (pair? x)) x)
+		(else (cons (deep-reverse (car (reverse x))) (deep-reverse (cdr (reverse x)))))))
+
+;; problem 2-28
+(define (fringe x)
+  (cond ((null? x) '())
+		((not (pair? x)) x)
+		(else (append (fringe (car x)) (fringe (cdr x))))))
+				   
+
+  
+
