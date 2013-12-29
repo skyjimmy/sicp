@@ -370,9 +370,10 @@
 		(else (cons (deep-reverse (car (reverse x))) (deep-reverse (cdr (reverse x)))))))
 
 ;; problem 2-28
+;; append는 list를 매개변수로 받아야 계산 가능하다
 (define (fringe x)
   (cond ((null? x) '())
-		((not (pair? x)) x)
+		((not (pair? x)) (list x))
 		(else (append (fringe (car x)) (fringe (cdr x))))))
 				   
 
