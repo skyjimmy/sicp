@@ -376,6 +376,56 @@
 		((not (pair? x)) (list x))
 		(else (append (fringe (car x)) (fringe (cdr x))))))
 				   
+;; problem 2-29
+(define (make-mobile left right)
+  (list left right))
+
+(define (make-branch length structure)
+  (list length structure))
+
+;; a. left-branch, right-branch, branch-length, branch-structure 만들기
+(define (left-branch mobile)
+  (car mobile))
+
+(define (right-branch mobile)
+  (cdr mobile))
+
+(define (branch-length branch)
+  (car branch))
+
+(define (branch-structure branch)
+  (cdr branch))
+
+;; b. total-weight 만들기 - no
+;; c. cons로 변경 했을 때 프로그램 수정 정도 - no
+
+;; tree 매핑
+(define (scale-tree tree factor)
+  (cond ((null? tree) '())
+		((not (pair? tree)) (* tree factor))
+		(else (cons (scale-tree (car tree) factor)
+					(scale-tree (cdr tree) factor)))))
+
+(define (scale-tree-map tree factor)
+  (map (lambda (sub-tree)
+		 (if (pair? sub-tree) 
+		   (scale-tree-map sub-tree factor)
+		   (* sub-tree factor)))
+	   tree))
+
+;; problem 2-30
+;; 바로 정의
+(define (square-tree tree)
+  (cond ((null? tree) '())
+		((not (pair? tree)) (* tree tree))
+		(else (cons (square-tree (car tree)) (square-tree (cdr tree))))))
+
+;; map으로 정의
+(define (square-tree-map tree)
+  (map (lambda (sub-tree)
+		 (if (pair? sub-tree) (square-tree-map sub-tree)
+		   (* sub-tree sub-tree)))
+	   tree))
 
   
 
