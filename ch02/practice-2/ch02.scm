@@ -434,3 +434,23 @@
 		((not (pair? tree)) (fn tree))
 		(else (cons (tree-map fn (car tree)) (tree-map fn (cdr tree))))))
 
+;; problem 2-32
+;; 시작 subsets (list 1 2 3)
+;; 1번째 let의 subsets (2 3)
+;; 2번째 let의 subsets (3)
+;; 3번째 let의 subsets '()
+;; 지금까지의 상황 (subsets (subsets (subsets '())))
+;; 1번째 return 값 (()) s 값은 '() 
+;; 2번째 return 값 (() (3)) lambda의 (car s) 값은 3이고  원본 list는(3) 
+;; 3번째 return 값 (() (3) (2) (2 3)) lambda의 (car s) 값은 2이고 원본 list는 (2 3)
+;; 마지막 return 값 (() (3) (2) (2 3) (1) (1 3) (1 2) (1 2 3)) lambda의 (car s) 값은 1이고 원본 list는 (1 2 3)
+;; 원래 (() (3)) 이라면 (car (list 1 2 3)) 일때 (() (3) (1) (1 3))으로 늘어아는 구조 이다.
+
+(define (subsets s)
+  (if (null? s) (list '())
+	(let ((rest (subsets (cdr s))))
+	  (display (car s))
+	  (newline)
+	  (display rest)
+	  (newline)
+	  (append rest (map (lambda (x) (cons (car s) x)) rest)))))
