@@ -512,3 +512,7 @@
 (define (product-of-squares-of-odd-elements sequence)
   (accumulate * 1 (map square (filter odd? sequence))))
 
+;; problem 2-33
+(define (map p sequence)
+  (accumulate (lambda (x y) (cons (p x) y)) '() sequence))
+
