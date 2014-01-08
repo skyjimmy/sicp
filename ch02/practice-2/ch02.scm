@@ -223,9 +223,9 @@
 	  (length-iter (cdr a) (+ 1 count))))
   (length-iter items 0))
 
-(define (append-221 list1 list2)
+(define (append list1 list2)
   (if (null? list1) list2
-	(cons (car list1) (append-221 (cdr list1) list2))))
+	(cons (car list1) (append (cdr list1) list2))))
 
 ;; problem 2-17
 (define (last-pair items)
@@ -513,6 +513,12 @@
   (accumulate * 1 (map square (filter odd? sequence))))
 
 ;; problem 2-33
+;; map의 계산 흐름
 (define (map p sequence)
   (accumulate (lambda (x y) (cons (p x) y)) '() sequence))
 
+(define (append seq1 seq2)
+  (accumulate cons seq2 seq1))
+
+(define (length sequence)
+  (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
