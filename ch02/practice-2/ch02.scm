@@ -522,3 +522,21 @@
 
 (define (length sequence)
   (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+
+;; problem 2-34
+;; 책에서 든 다항식 연산 예제
+;; x=2일때 1 + 3x + 5x^3 + x^5를 호너의 규칙으로 변환 하면
+;; x^5 부터 거꾸로 연산 된다.
+;; ((((1*x + 0)*x + 5)*x + 0)*x + 3)*x + 1
+;; x에 2를 대입 하면
+;; ((((2 + 0)2 + 5)2 + 0)2 + 3)2 + 1
+;; 안쪽 괄호부터 계산 하면
+;; (((4 + 5)2 + 0)2 + 3)2 + 1
+;; ((18 + 0)2 + 3)2 + 1
+;; (36 + 3)2 + 1
+;; 78 + 1 = 79
+;; 위 다항식을 손으로 계산해도 79가 나온다
+(define (horner-evel x coefficient-sequence)
+  (accumulate (lambda (this-coeff highter-terms) (+ this-coeff (* x highter-terms)))
+			  0
+			  coefficient-sequence))
