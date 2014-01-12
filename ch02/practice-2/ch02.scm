@@ -549,3 +549,9 @@
 (define (count-leaves t)
   (let ((var-list (enumerate-tree t)))
 	(accumulate + 0 (map (lambda (x) 1) var-list))))
+
+;; problem 2-36
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs)) '()
+	(cons (accumulate op init (map car seqs))
+		  (accumulate-n op init (map cdr seqs)))))
