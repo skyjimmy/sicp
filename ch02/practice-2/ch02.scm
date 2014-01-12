@@ -542,6 +542,10 @@
 			  coefficient-sequence))
 
 ;; problem 2-35
-(define (count-leaves-235 t)
+(define (count-leaves t)
   (let ((var-list (enumerate-tree t)))
-		  (accumulate (lambda (x y) (+ 1 y)) 0 (map (lambda (x) x) var-list))))
+	(accumulate (lambda (x y) (+ 1 y)) 0 (map (lambda (x) x) var-list))))
+
+(define (count-leaves t)
+  (let ((var-list (enumerate-tree t)))
+	(accumulate + 0 (map (lambda (x) 1) var-list))))
