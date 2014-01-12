@@ -540,3 +540,8 @@
   (accumulate (lambda (this-coeff highter-terms) (+ this-coeff (* x highter-terms)))
 			  0
 			  coefficient-sequence))
+
+;; problem 2-35
+(define (count-leaves-235 t)
+  (let ((var-list (enumerate-tree t)))
+		  (accumulate (lambda (x y) (+ 1 y)) 0 (map (lambda (x) x) var-list))))
