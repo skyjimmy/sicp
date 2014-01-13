@@ -514,7 +514,7 @@
 
 ;; problem 2-33
 ;; map의 계산 흐름
-(define (map p sequence)
+(define (map-233 p sequence)
   (accumulate (lambda (x y) (cons (p x) y)) '() sequence))
 
 (define (append seq1 seq2)
@@ -555,3 +555,17 @@
   (if (null? (car seqs)) '()
 	(cons (accumulate op init (map car seqs))
 		  (accumulate-n op init (map cdr seqs)))))
+
+;; problem 2-37
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+
+(define (matrix-*-vector m v)
+  (map (lambda (x) (dot-product x v)) m))
+
+(define (transpose mat)
+  (accumulate-n cons '() mat))
+
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+	(map (lambda (x) (matrix-*-vector cols x)) m)))
