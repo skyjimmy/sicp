@@ -1,72 +1,73 @@
 ;; 1.1.1
-486
-
-(+ 137 349)
 ;; 486
 
-(- 1000 334)
+;; (+ 137 349)
+;; 486
+
+;; (- 1000 334)
 ;; 666
 
-(* 5 99)
+;; (* 5 99)
 ;; 495
 
-(/ 10 5)
+;; (/ 10 5)
 ;; 2
 
-(+ 2.7 10)
+;; (+ 2.7 10)
 ;; 12.7
 
-(+ 21 35 12 7)
+;; (+ 21 35 12 7)
 ;; 75
 
-(* 25 4 12)
+;; (* 25 4 12)
 ;; 1200
 
-(+ (* 3 5) (- 10 6))
+; (+ (* 3 5) (- 10 6))
 ;; 19
 
 ;; 1.1.2
-(define size 2)
+; (define size 2)
 
-(* 5 size)
+; (* 5 size)
 ;; 10
 
-(define pi 3.14159)
+; (define pi 3.14159)
 
-(define radius 10)
+; (define radius 10)
 
-(* pi (* radius radius))
+; (* pi (* radius radius)) 
+; 314.159
 
-(define circumference (* 2 pi radius))
+; (define circumference (* 2 pi radius))
 
-circumference ;; 62.8318
+; circumference ;; 62.8318
 
 ;; 1.1.3
-(* (+ 2 (* 4 6))
-   (+ 3 5 7))
+;(* (+ 2 (* 4 6))
+;   (+ 3 5 7))
 
 ;; 1.1.4
 (define (square x) (* x x))
 
-(square 21)
+;(square 21)
 ;; 441
 
-(square (+ 2 5))
+;(square (+ 2 5))
 ;; 49
 
-(square (square 3))
+; (square (square 3))
 ;; 81
 
 (define (sum-of-squares x y)
   (+ (square x) (square y)))
 
-(sum-of-squares 3 4)
+; (sum-of-squares 3 4)
 ;; 25
 
 (define (f a)
   (sum-of-squares (+ a 1) (* a 2)))
 
-(f 5)
+; (f 5)
 ;; 136
 
 ;; 1.1.6
@@ -83,7 +84,100 @@ circumference ;; 62.8318
   (if (< x 0) (- x)
 	x))
 
-;; 1.1.7
+; problem 1.1
+10
+;; 10
+
+(+ 5 3 4)
+;; 12
+
+(- 9 1)
+;; 8
+
+(/ 6 2)
+;; 3
+
+(+ (* 2 4) (- 4 6))
+;; 6
+
+(define a 3)
+
+(define b (+ a 1))
+;; 4
+
+(+ a b (* a b))
+;; 19
+
+(= a b)
+;; #f
+
+(if (and (> b a) (< b (* a b))) b
+  a)
+;; 4
+
+(cond ((= a 4) 6)
+	  ((= b 4) (+ 6 7 a))
+	  (else 25))
+;; 16
+
+(+ 2 (if (> b a) b a))
+;; 6
+
+(* (cond ((> a b) a)
+		 ((< a b) b)
+		 (else -1))
+   (+ a 1))
+;; 16
+
+; problem 1-2 
+; (/ (* 3 (* (- 6 2) (- 2 7))) (+ (+ 5 4) (- 2 (- 3 (+ 6 (/ 5 4))))))
+
+; problem 1-3
+(define (plus-square a b c)
+  (cond ((and (> a b) (> a c)) 
+		 (if (> b c) (sum-of-squares a b)
+		   (sum-of-squares a c)))
+		((and (> b c) (> b a))
+		 (if (> a c) (sum-of-squares b a)
+		   (sum-of-squares b c)))
+		((and (> c a) (> c b))
+		 (if (> a b) (sum-of-squares c a)
+		   (sum-of-squares c b)))))
+
+; problem 1-4
+; b의 값에 따라서 b가 양수아면
+; + 로 값을 구하고
+; b가 음수 이면 - 값으로 
+; 음수에 -를 더해 양수로 만들어 값을 구한다
+; 만약 b가 -2 이면
+; (-(-2)) 형태가 되어 결국에는 양수로 된다.
+(define (a-plus-abs-b a b)
+  ((if (> b 0) + -) a b))
+
+; problem 1-5
+(define (p) (p))
+
+(define (test x y)
+  (if (= x 0)
+	0
+	y))
+
+; 인자 먼저 계산 법에서 (test 0 (p)) 실행 결과
+; 인자인 (p) 프로지서의 값을 먼저 구해야 되므로
+; (p) 프로시저가 실행이 되나. (p)는 자신을 호출 하므로
+; 영원히 종료되지 않는다.
+; (test 0 (p))
+; (p) -> (p) -> (p) -> (p) -> (p) -> ........
+
+; 정의 대로 계산 법에서 (test 0 (p)) 실행 결과
+; 인자인 0, (p)가 내부의 값으로 변경
+; (test 0 (p))
+; (if (= 0 0) 
+;     0
+;     (p))
+; 0 = 0 이므로 0으로 종료됨
+
+; 1.1.7
 (define (sqrt-iter guess x)
   (if (good-enough? guess x) guess
 	(sqrt-iter (improve guess x) x)))
@@ -100,7 +194,63 @@ circumference ;; 62.8318
 (define (sqrt x)
   (sqrt-iter 1.0 x))
 
-;; 1.1.8
+; problem 1-6
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause)
+		(else else-clause)))
+; new-if 사용시 sqrt-iter가 함수의 인자로 받아 들여지므로
+; 인자 먼저 계산법으로 인하여 sqrt-iter가 무한 반복이 되는 현상이다.
+; 즉, if 사용시에는 인저 먼저 계산법으로 받아들여 지지 않는다는
+; 얘기 인 것 같다.
+
+; problem 1-7
+; (sqrt 4)의 값을 구할 때 흔히 알고 있는 2라는 값이 출력 되는
+; 것이 아니라 2.0000102400262145라는 값이 출력 되고
+; 역시 마찬가지로 (sqrt 90000000000)의 값을 구할 때도
+; 300000.이라는 값으로 출력이 된다.
+; 정상적으로 나오게 하면 되는 것이 아닐까 싶다.
+
+; 인터넷에서 찾아보니 작은 값의 경우 (sqrt 0.001)의 값을 구할 수가
+; 없다는 것이다.
+; 아주 큰 값의 경우에는 9로 시작하는 20자리 이상의 값을 입력 할 경우에
+; 값이 구해 지지 않고 멈추는 현상이 발생 한다.
+; 문제를 보면 참 값에 더 가까운 값 guess를 구하기 위해 어림 잡은 값을 
+; 조금씩 고쳐 나가면서 헌 값에 견주어 고친 값이 그다지 나아지지 않을 
+; 때까지 계산을 이어가는 것이다 라는 얘기가 나온다.
+; 이 말의 뜻이 정확히 어떤 뜻인지 잘 모르겠다.
+; 왜 작은 값과 큰 값의 경우에 수가 정확하게 나오지 않는지 내 생각을
+; 정리 하는 것이 필요 할 듯 싶다.
+; 오차를 줄이기 위한 과정이 하나 더 추가 된거 같긴 한데
+; 왜 (* 0.001 guess)가 추가된 건지는 잘 모르겠다.
+; 좀 더 고민 해 봐야 될 문제 이다.
+(define (sqrt-iter before-guess guess x)
+  (if (good-enough? before-guess guess) guess
+		  (sqrt-iter guess (improve guess x) x)))
+
+(define (good-enough? before-guess guess)
+  (< (abs (- before-guess guess)) (* 0.001 guess)))
+
+(define (sqrt x)
+  (sqrt-iter 1.0 (improve 1.0 x) x))
+
+; problem1-8
+; sqrt의 방법으로 세제곱근을 구하는 것을 만들었음
+; 그러나 현재 구하는 식으로는 소수점은 구하지 못할 것으로 보임
+
+(define (improve guess x)
+  (/ (+ (/ x (* guess guess)) (* guess 2)) 3))
+
+(define (guess-enough? before-guess guess x)
+  (< (abs (- (improve guess x) before-guess)) 0.001))
+
+(define (three-sqrt-iter before-guess guess x)
+  (if (guess-enough? before-guess guess x) guess
+	(three-sqrt-iter guess (improve guess x) x)))
+
+(define (three-sqrt x)
+  (three-sqrt-iter 1.0 (improve 1.0 x) x))
+
+; 1.1.8
 (define (square x)
   (exp (double (log x))))
 
@@ -126,6 +276,7 @@ circumference ;; 62.8318
 	  (sqrt-iter (improve guess))))
   (sqrt-iter 1.0))
 
+; 1.2
 ;; 1.2.1
 (define (factorial n)
   (if (= n 1) 1
@@ -143,6 +294,49 @@ circumference ;; 62.8318
 (define (fact-iter product counter max-count)
   (if (> counter max-count) product
 	(fact-iter (* counter product) (+ counter 1) max-count)))
+
+; problem 1-9
+; 아래 식은 inc 계산을 미루는 되도는 프로세스 이다.
+; (define (+ a b)
+;   (if (= a 0) b
+;	 (inc (+ (dec a) b))))
+
+ (define (inc x)
+  (+ x 1))
+
+(define (dec x)
+  (- x 1))
+
+; 아래 식은 자기의 계산을 반복하는 반복 프로세스 이다.
+; (define (+ a b)
+;   (if (= a 0) b
+; 	 (+ (dec a) (inc b))))
+
+; problem 1-10
+(define (A x y)
+  (cond ((= y 0) 0)
+		((= x 0) (* 2 y))
+		((= y 1) 2)
+		(else (A (- x 1)
+				 (A x (- y 1))))))
+
+;; 1024
+(A 1 10)
+
+;; 65536
+(A 2 4)
+
+;; 65536
+(A 3 3)
+
+;; 2n
+; (define (f n) (A 0 n))
+
+;; 2^n
+; (define (g n) (A 1 n))
+
+;; 2^n*n
+; (define (h n) (A 2 n))
 
 ;; 1.2.2
 (define (fib n)
@@ -313,6 +507,16 @@ circumference ;; 62.8318
 	 (* y b)
 	 (* a b)))
 
+; problem 1-34
+; (define (f g)
+;   (g 2))
+
+; (define (square x)
+;   (* x x))
+
+; (f f)의 계산은 (f f) -> (f 2) -> (2 2)의 흐름으로
+; 계산이 된다. 그러므로 (2 2)는 계산이 될 수 없다.
+
 ;; 1.3.3
 (define (search f neg-point pos-point)
   (let ((midpoint (average neg-point pos-point)))
@@ -391,4 +595,14 @@ circumference ;; 62.8318
   (fixed-point-of-transform (lambda (y) (- (square y) x))
 							newton-transform
 							1.0))
+; problem 1-41
+(define (inc i)
+  (+ i 1))
+
+(define (double f)
+  (lambda (x) (f (f x))))
+
+;; problem 1-42
+(define (compose f g)
+  (lambda (x) (f (g x))))
 
