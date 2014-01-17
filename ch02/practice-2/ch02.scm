@@ -569,3 +569,23 @@
 (define (matrix-*-matrix m n)
   (let ((cols (transpose n)))
 	(map (lambda (x) (matrix-*-vector cols x)) m)))
+
+;; problem 2-38 - no
+;; 재귀와 반복의 차이 인가???
+;; 결합 교환 법칙이라고 하는데 왜 그것이 되는건지 잘 모르겠다.
+(define nil '())
+
+(define (fold-right op inital sequence)
+  (accumulate op inital sequence))
+
+(define (fold-left op inital sequence)
+  (define (iter result rest)
+	(if (null? rest) result
+	  (iter (op result (car rest))
+			(cdr rest))))
+  (iter inital sequence))
+
+;; problem2-39 - no
+;; fold-right 풀지 못함
+(define (reverse-239-2 sequence)
+  (fold-left (lambda (x y) (cons y x)) nil sequence))
