@@ -28,4 +28,11 @@
 	   ac))
   accumulator)
 
-
+; problem 3-2
+(define (make-monitored f)
+  (define manycalls 0)
+  (define (dispatch m)
+    (cond ((eq? m 'how-many-calls?) manycalls)
+	  (else (begin (set! manycalls (+ manycalls 1))
+		       (f m)))))
+  dispatch)
