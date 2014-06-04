@@ -128,6 +128,46 @@
 		      x2))))))
   (iter trials 0 initial-x))
 
+; problem 3-5 - no
+; problem 3-6 - no
+
+; 3.1.3
+(define (make-simplified-withdraw balance)
+  (lambda (amount)
+    (set! balance (- balance amount))
+    balance))
+
+(define (make-decrementer balance)
+  (lambda (amount)
+    (- balance amount)))
+
+; problem 3-7 - no
+; problem 3-8 - no
+
+; 3.2.1
+; 3.2.2
+; problem 3-9 - no
+; 3.2.3
+; problem 3-10 - no
+; 3.2.4
+; problem 3-11 - no
+; 3.3
+; 3.3.1
+(define (set-car! gr x)
+  (begin (set! (car gr) x)
+	 x))
+
+(define (set-cdr! gr x)
+  (begin (set! (cdr gr) x)
+	 x))
+
+
+
+
+
+
+
+
 	
     
 	
