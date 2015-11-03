@@ -1,6 +1,8 @@
 (define (f g)
   (g 2))
 
+(f f)
+
 (define (square x)
   (* x x))
 

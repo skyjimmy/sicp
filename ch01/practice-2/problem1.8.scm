@@ -1,5 +1,5 @@
 ;; sqrt의 방법으로 세제곱근을 구하는 것을 만들었음
-;; 그러나 현재 구하는 식으로는 소수점은 구하지 못할 것으로 보임
+;; 현재 8, 27에 대해서는 세제곱근이 구해 짐
 
 (define (improve guess x)
   (/ (+ (/ x (* guess guess)) (* guess 2)) 3))
@@ -14,3 +14,5 @@
 (define (three-sqrt x)
   (three-sqrt-iter 1.0 (improve 1.0 x) x))
 
+(three-sqrt 8)
+(three-sqrt 27)

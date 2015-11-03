@@ -21,6 +21,9 @@
 (define (sqrt x)
   (sqrt-iter 1.0 x))
 
+;;test
+(sqrt 4)
+(square 4)
 ;; new-if 사용시 sqrt-iter가 함수의 인자로 받아 들여지므로
 ;; 인자 먼저 계산법으로 인하여 sqrt-iter가 무한 반복이 되는 현상이다.
 ;; 즉, if 사용시에는 인저 먼저 계산법으로 받아들여 지지 않는다는
